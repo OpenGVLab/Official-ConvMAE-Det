@@ -1,68 +1,81 @@
-<img src=".github/Detectron2-Logo-Horz.svg" width="300" >
+# ConvMAE: Masked Convolution Meets Masked Autoencoders
 
-<a href="https://opensource.facebook.com/support-ukraine">
-  <img src="https://img.shields.io/badge/Support-Ukraine-FFD500?style=flat&labelColor=005BBB" alt="Support Ukraine - Help Provide Humanitarian Aid to Ukraine." />
-</a>
 
-Detectron2 is Facebook AI Research's next generation library
-that provides state-of-the-art detection and segmentation algorithms.
-It is the successor of
-[Detectron](https://github.com/facebookresearch/Detectron/)
-and [maskrcnn-benchmark](https://github.com/facebookresearch/maskrcnn-benchmark/).
-It supports a number of computer vision research projects and production applications in Facebook.
+[[`arXiv`](https://arxiv.org/abs/2205.03892)]
 
-<div align="center">
-  <img src="https://user-images.githubusercontent.com/1381301/66535560-d3422200-eace-11e9-9123-5535d469db19.png"/>
-</div>
-<br>
+This repository contains the implementation of the ConvMAE transfer learning for object detection on COCO.
 
-## Learn More about Detectron2
+For ImageNet pretraining and pretrained checkpoint, please refer to [ConvMAE](https://github.com/Alpha-VL/ConvMAE).
 
-Explain Like I’m 5: Detectron2            |  Using Machine Learning with Detectron2
-:-------------------------:|:-------------------------:
-[![Explain Like I’m 5: Detectron2](https://img.youtube.com/vi/1oq1Ye7dFqc/0.jpg)](https://www.youtube.com/watch?v=1oq1Ye7dFqc)  |  [![Using Machine Learning with Detectron2](https://img.youtube.com/vi/eUSgtfK4ivk/0.jpg)](https://www.youtube.com/watch?v=eUSgtfK4ivk)
 
-## What's New
-* Includes new capabilities such as panoptic segmentation, Densepose, Cascade R-CNN, rotated bounding boxes, PointRend,
-  DeepLab, ViTDet, MViTv2 etc.
-* Used as a library to support building [research projects](projects/) on top of it.
-* Models can be exported to TorchScript format or Caffe2 format for deployment.
-* It [trains much faster](https://detectron2.readthedocs.io/notes/benchmarks.html).
+### COCO
 
-See our [blog post](https://ai.facebook.com/blog/-detectron2-a-pytorch-based-modular-object-detection-library-/)
-to see more demos and learn about detectron2.
+<table><tbody>
+<!-- START TABLE -->
+<!-- TABLE HEADER -->
+<th valign="bottom">Name</th>
+<th valign="bottom">pre-train</th>
+<th valign="bottom">pre-train<br/>epoch</th>
+<th valign="bottom">finetune<br/>epoch</th>
+<th valign="bottom">box<br/>AP</th>
+<th valign="bottom">mask<br/>AP</th>
+<th valign="bottom">model</th>
+<th valign="bottom">log</th>
+<!-- TABLE BODY -->
+<!-- ROW: mask_rcnn_vitdet_b_100ep -->
+ <tr><td align="center">ViTDet, ViT-B</td>
+<td align="center">IN1K, MAE</td>
+<td align="center">1600</td>
+<td align="center">100</td>
+<td align="center">51.6</td>
+<td align="center">45.9</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+<!-- ROW: mask_rcnn_vitdet_l_100ep -->
+ <tr><td align="center"><a href="configs/COCO/mask_rcnn_vitdet_convmae_b_25ep.py">ViTDet, ConvMAE-B</a></td>
+<td align="center">IN1K, ConvMAE</td>
+<td align="center">1600</td>
+<td align="center">25</td>
+<td align="center">53.9</td>
+<td align="center">47.6</td>
+<td align="center"><a href="https://drive.google.com/file/d/1DccgEmvEQs6i_ZVGZESngIARznJVFDLY/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://drive.google.com/file/d/1YAnoopUpLSorn9ugq8WGfPyhIDcFouTI/view?usp=sharing">log</a></td>
+</tr>
+</tbody></table>
+
+
+</tr>
+</tbody></table>
+
 
 ## Installation
 
-See [installation instructions](https://detectron2.readthedocs.io/tutorials/install.html).
+Please follow [Installation](https://detectron2.readthedocs.io/en/latest/tutorials/install.html) to install detectron2.
 
-## Getting Started
+## Training
+```
+python tools/lazyconfig_train_net.py --num-gpus 8 --config-file \ 
+projects/ConvMAEDet/configs/COCO/mask_rcnn_vitdet_convmae_b_25ep.py \
+train.init_checkpoint=path/to/pretrained_model
+```
 
-See [Getting Started with Detectron2](https://detectron2.readthedocs.io/tutorials/getting_started.html),
-and the [Colab Notebook](https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5)
-to learn about basic usage.
+## Evaluation
+```
+python tools/lazyconfig_train_net.py --num-gpus 8 --eval-only --config-file \ 
+projects/ConvMAEDet/configs/COCO/mask_rcnn_vitdet_convmae_b_25ep.py \
+train.init_checkpoint=path/to/model_checkpoint
+```
 
-Learn more at our [documentation](https://detectron2.readthedocs.org).
-And see [projects/](projects/) for some projects that are built on top of detectron2.
+## Acknowledgement
+This project is based on [VitDet](https://github.com/facebookresearch/detectron2/tree/main/projects/ViTDet). Thanks for their wonderful work.
 
-## Model Zoo and Baselines
-
-We provide a large set of baseline results and trained models available for download in the [Detectron2 Model Zoo](MODEL_ZOO.md).
-
-## License
-
-Detectron2 is released under the [Apache 2.0 license](LICENSE).
-
-## Citing Detectron2
-
-If you use Detectron2 in your research or wish to refer to the baseline results published in the [Model Zoo](MODEL_ZOO.md), please use the following BibTeX entry.
-
-```BibTeX
-@misc{wu2019detectron2,
-  author =       {Yuxin Wu and Alexander Kirillov and Francisco Massa and
-                  Wan-Yen Lo and Ross Girshick},
-  title =        {Detectron2},
-  howpublished = {\url{https://github.com/facebookresearch/detectron2}},
-  year =         {2019}
+## Citation
+```
+@article{gao2022convmae,
+  title={ConvMAE: Masked Convolution Meets Masked Autoencoders},
+  author={Gao, Peng and Ma, Teli and Li, Hongsheng and Dai, Jifeng and Qiao, Yu},
+  journal={arXiv preprint arXiv:2205.03892},
+  year={2022}
 }
 ```
