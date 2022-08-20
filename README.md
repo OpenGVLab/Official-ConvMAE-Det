@@ -68,7 +68,7 @@ train.init_checkpoint=path/to/model_checkpoint
 ```
 
 ## Acknowledgement
-This project is based on [VitDet](https://github.com/facebookresearch/detectron2/tree/main/projects/ViTDet). Thanks for their wonderful work.
+This project is based on [Detectron2](https://github.com/facebookresearch/detectron2) and [VitDet](https://github.com/facebookresearch/detectron2/tree/main/projects/ViTDet). Thanks for their wonderful work.
 
 ## Citation
 ```
