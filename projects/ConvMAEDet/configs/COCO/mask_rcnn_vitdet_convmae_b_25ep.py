@@ -5,8 +5,7 @@ import torch.nn as nn
 from detectron2 import model_zoo
 from detectron2.config import LazyCall as L
 from detectron2.solver import WarmupParamScheduler
-from projects.ConvMAEDet.modeling.convmae import get_vit_lr_decay_rate
-from projects.ConvMAEDet.modeling.convmae import ConvViT
+from ...modeling.convmae import ConvViT, get_vit_lr_decay_rate
 
 from ..common.coco_loader_lsj import dataloader
 

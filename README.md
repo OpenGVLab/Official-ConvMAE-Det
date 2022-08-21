@@ -53,6 +53,13 @@ For ImageNet pretraining and pretrained checkpoint, please refer to [ConvMAE](ht
 
 Please follow [Installation](https://detectron2.readthedocs.io/en/latest/tutorials/install.html) to install detectron2.
 
+## Preparing Dataset
+
+```
+cd datasets
+ln -s /path/to/coco coco
+```
+
 ## Training
 ```
 python tools/lazyconfig_train_net.py --num-gpus 8 --config-file \ 
