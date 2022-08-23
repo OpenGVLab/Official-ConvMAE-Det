@@ -33,7 +33,7 @@ For ImageNet pretraining and pretrained checkpoint, please refer to [ConvMAE](ht
 <td align="center">-</td>
 </tr>
 <!-- ROW: mask_rcnn_vitdet_l_100ep -->
- <tr><td align="center"><a href="configs/COCO/mask_rcnn_vitdet_convmae_b_25ep.py">ViTDet, ConvMAE-B</a></td>
+ <tr><td align="center"><a href="projects/ConvMAEDet/configs/COCO/mask_rcnn_vitdet_convmae_b_25ep.py">ViTDet, ConvMAE-B</a></td>
 <td align="center">IN1K, ConvMAE</td>
 <td align="center">1600</td>
 <td align="center">25</td>
