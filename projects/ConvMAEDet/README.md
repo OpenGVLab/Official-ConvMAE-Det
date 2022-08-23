@@ -39,8 +39,8 @@ For ImageNet pretraining and pretrained checkpoint, please refer to [ConvMAE](ht
 <td align="center">25</td>
 <td align="center">53.9</td>
 <td align="center">47.6</td>
-<td align="center"><a href="https://drive.google.com/file/d/1DccgEmvEQs6i_ZVGZESngIARznJVFDLY/view?usp=sharing">model</a></td>
-<td align="center"><a href="https://drive.google.com/file/d/1YAnoopUpLSorn9ugq8WGfPyhIDcFouTI/view?usp=sharing">log</a></td>
+<td align="center"><a href="https://drive.google.com/file/d/1YAnoopUpLSorn9ugq8WGfPyhIDcFouTI/view?usp=sharing">model</a></td>
+<td align="center"><a href="https://drive.google.com/file/d/1DccgEmvEQs6i_ZVGZESngIARznJVFDLY/view?usp=sharing">log</a></td>
 </tr>
 </tbody></table>
 
@@ -52,6 +52,13 @@ For ImageNet pretraining and pretrained checkpoint, please refer to [ConvMAE](ht
 ## Installation
 
 Please follow [Installation](https://detectron2.readthedocs.io/en/latest/tutorials/install.html) to install detectron2.
+
+## Preparing Dataset
+
+```
+cd datasets
+ln -s /path/to/coco coco
+```
 
 ## Training
 ```
